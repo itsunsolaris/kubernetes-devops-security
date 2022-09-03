@@ -15,11 +15,11 @@ pipeline {
         }
       stage('Docker Build and Push') {
             steps {
-              sh 'printenv'
               docker.withRegistry([credentialsId, "docker-hub", url: ""]) {
-              sh 'docker build -t imranmalikit/numeric-app:""$GIT_COMMIT"" .'
-              sh 'docker push imranmalikit/numeric-app:""$GIT_COMMIT""'
-              sh "mvn test"
+                sh 'printenv'
+                sh 'docker build -t imranmalikit/numeric-app:""$GIT_COMMIT"" .'
+                sh 'docker push imranmalikit/numeric-app:""$GIT_COMMIT""'
+                sh "mvn test"
             }
         }                     
     }
