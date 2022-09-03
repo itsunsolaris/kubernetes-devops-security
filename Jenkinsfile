@@ -12,6 +12,14 @@ pipeline {
             steps {
               sh "mvn test"
             }
-        }            
+        }
+      stage('Docker Build and Push') {
+            steps {
+              sh 'printenv'
+              sh 'docker build -t imranmalikit/numeric-app:""$GIT_COMMIT"" .'
+              sh 'docker push imranmalikit/numeric-app:""$GIT_COMMIT""'
+              sh "mvn test"
+            }
+        }                     
     }
 }
