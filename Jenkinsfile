@@ -14,12 +14,6 @@ pipeline {
             }
         }
 
-      stage('SonarQube - Statis AST') {
-            steps {
-              sh "mvn clean verify sonar:sonar -Dsonar.projectKey=Numeric-Application -Dsonar.host.url=http://imrandevops.eastus.cloudapp.azure.com:9000 -Dsonar.login=sqp_c26aac8b23c2bb258f565b47978b6127a8bbb9ab"
-            }
-        }
-
       stage('Docker Build and Push') {
             steps {
               withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
@@ -29,7 +23,7 @@ pipeline {
             }
         }                     
     }
-    
+
       stage('Kubernetes Deployment - DEV') {
             steps {
               withKubeConfig([credentialsId: 'kubeconfig']) {
