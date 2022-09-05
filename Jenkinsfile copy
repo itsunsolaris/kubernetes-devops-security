@@ -1,15 +1,8 @@
 pipeline {
   
   agent any
-  
-  stages {
 
-      stage('GetCode'){
-            steps{
-                git 'https://github.com/ravdy/javaloginapp.git'
-            }
-         }
-              
+  stages {
       stage('Build Artifact') {
             steps {
               sh "mvn clean package -DskipTests=true"
@@ -51,6 +44,3 @@ pipeline {
     }    
 }
 }
-
-
-
