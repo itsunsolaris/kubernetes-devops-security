@@ -1,4 +1,5 @@
 pipeline {
+  
   agent any
 
   stages {
@@ -8,6 +9,7 @@ pipeline {
               archive 'target/*.jar'  //so that they can be downloaded later  
             }
         }
+
       stage('Test Maven') {
             steps {
               sh "mvn test"
@@ -17,9 +19,7 @@ pipeline {
       stage('SonarQube analysis') {
             steps {
               withSonarQubeEnv('SonarQube') {
-              
-             sh 'mvn clean verify sonar:sonar'
-
+              sh 'mvn clean verify sonar:sonar'
               }
             }
          }
