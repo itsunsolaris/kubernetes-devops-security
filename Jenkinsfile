@@ -14,6 +14,15 @@ pipeline {
             }
         }
 
+      stage('Test Maven') {
+            steps {
+              sh "mvn clean verify sonar:sonar \
+                  -Dsonar.projectKey=Numeric-Application \
+                  -Dsonar.host.url=http://imrandevops.eastus.cloudapp.azure.com:9000 \
+                  -Dsonar.login=sqp_ae6342a3e7a0116f09be47f67c1d6c8fc4e6aa7f"
+            }
+        }
+
       stage('Docker Build and Push') {
             steps {
               withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
